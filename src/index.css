@@ -27,7 +27,7 @@ input{
     overflow: hidden;
 }
 
-.card img{
+.card p{
     padding: 5px;
     text-align: center;
 }
