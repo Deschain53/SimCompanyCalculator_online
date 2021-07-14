@@ -1,6 +1,6 @@
 //Intentar poner use al iniciar un hook
 import {useState,useEffect} from 'react';
-import { getGifs } from '../helpers/getGifs';
+import { getProduceInfo } from '../helpers/getProduceEdificio';
 
 export const useFetchGifs= ( category ) => {
 
@@ -11,7 +11,7 @@ export const useFetchGifs= ( category ) => {
 
     useEffect( () => {
 
-            getGifs( category )
+        getProduceInfo( category )
             .then( imgs => {
                 setstate({
                     data: imgs,

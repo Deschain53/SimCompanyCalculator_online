@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en <GiftExpertApp /> debe mostrar <GifExpertApp/> correctamente 1`] = `
+<div
+  className="card"
+>
+  <img
+    alt="Un titulo"
+    src="https.fd"
+  />
+  <p>
+     
+    Un titulo
+      
+  </p>
+</div>
+`;
