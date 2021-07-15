@@ -1,7 +1,8 @@
-//Hace la conexión con la API del mercado para obtener el precio
+//Hace la conexión con la API del mercado para los precios de un producto en especifico
 
-export const getPrecio = async(id) =>{
-    const url = `https://www.simcompanies.com/api/v2/market/${encodeURI(id)}`;
+export const getPrecios = async(id) =>{
+    const header= `https://ronchon-vin-08117.herokuapp.com/`;
+    const url = header +`https://www.simcompanies.com/api/v2/market/${encodeURI(id)}`;
     const resp = await fetch(url);
     const informacion = await resp.json();
 
@@ -17,6 +18,8 @@ export const getPrecio = async(id) =>{
 
     return precios;
     }
+
+
 
 
 
