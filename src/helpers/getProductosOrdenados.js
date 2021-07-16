@@ -9,8 +9,8 @@ export const getProductosOrdenados = (preciosProducto) => {
 
     //Para encontrar los precios de cada calidad
     for(let i = 0 ; i < calidadMaxima; i++){
-        const aux = preciosProducto.find(producto => producto.calidad == i);
-        if(aux != undefined ){
+        const aux = preciosProducto.find(producto => producto.calidad === i);
+        if(aux !== undefined ){
             precios[i] = aux.precio;
         }else{
             precios[i] = -1;
@@ -21,7 +21,7 @@ export const getProductosOrdenados = (preciosProducto) => {
     for(let i = preciosProducto.lenght-1; i > 0; i--){
         if(precios[i] < precios[i-1] && precios[i] > 0){
             precios[i-1] = precios[i];
-        }else if(precios[i-1] == -1 && precios[i] > 0){
+        }else if(precios[i-1] === -1 && precios[i] > 0){
             precios[i-1] = precios[i];
         }
     }
