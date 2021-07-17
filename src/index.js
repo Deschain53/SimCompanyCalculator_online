@@ -5,7 +5,7 @@ import './index.css';
 import ProductionCalculator  from './ProductionCalculator'
  
 ReactDOM.render(
-    <ProductionCalculator />,
+    <ProductionCalculator key = '1998'/>,
     document.getElementById('root')
 );
 

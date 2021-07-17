@@ -1,11 +1,19 @@
 //import PropTypes from 'prop-types';
 
-export const productoObject = (producto,costo,precioMercado,gananciaHoraMercado) => {     
+export const productoObject = (
+    id,
+    nombre,
+    produccionHora,
+    producto,
+    precioMercado,
+    costo,
+    gananciaHoraMercado,
+    gananciaHoraContrato) => {     
 
     const productos = {
-        nombre: producto.name,
-        id: producto.db_letter,
-        produccionHora: producto.producedAnHour,
+        nombre: nombre,
+        id: producto.id,
+        produccionHora: produccionHora,
         costo: costo,
         precioMercado: precioMercado,
         gananciaHoraMercado: gananciaHoraMercado

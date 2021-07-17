@@ -1,4 +1,5 @@
 //Hace la conexión con la API del mercado para los precios de un producto en especifico
+//Obtiene TODOS los productos del mercado
 
 export const getPrecios = async(id) =>{
     //const header= `https://ronchon-vin-08117.herokuapp.com/`;

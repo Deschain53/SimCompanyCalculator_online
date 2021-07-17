@@ -2,10 +2,11 @@
 //se procesan los datos y se devuelve el array con los precios 
 
 
-export const getProductosOrdenados = (preciosProducto) => {
-    
+export const getProductosOrdenados = (preciosProductoPromise) => {
+
     const calidadMaxima = 6;
     let precios = new Array();
+    preciosProductoPromise.then( preciosProducto => {
 
     //Para encontrar los precios de cada calidad
     for(let i = 0 ; i < calidadMaxima; i++){
@@ -26,9 +27,8 @@ export const getProductosOrdenados = (preciosProducto) => {
         }
     }
 
-    console.log(precios);
+    });
 
-    const preciosConst = {...precios}
-
-    return preciosConst;
+    return precios;
+     
 }
