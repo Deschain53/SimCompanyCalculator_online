@@ -4,7 +4,7 @@ export const productoObject = (
     id,
     nombre,
     produccionHora,
-    producto,
+    //producto,
     precioMercado,
     costo,
     gananciaHoraMercado,
@@ -12,7 +12,7 @@ export const productoObject = (
 
     const productos = {
         nombre: nombre,
-        id: producto.id,
+        id: id, //producto.id,
         produccionHora: produccionHora,
         costo: costo,
         precioMercado: precioMercado,

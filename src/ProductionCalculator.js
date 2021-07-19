@@ -13,13 +13,13 @@ import Paper from '@material-ui/core/Paper';
 //--------------------------------------------------
 
 const datos = {
-    fase : 0,
+    fase : 2,
     nivelEdificio : 1,
-    admin : 10,
-    bonificacion : 10,
+    admin : 60,
+    bonificacion : 4,
     transporte : 0.35,
     pvm : 3,
-    calidad : 0,
+    calidad : 5,
 };
 
 
