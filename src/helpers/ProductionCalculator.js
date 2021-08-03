@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import {helperPO} from './helpers/helperPO';
 
 //Importaciones para las tablas:-------------------
@@ -23,10 +23,10 @@ const datos = {
 };
 
 
-// const pI = ProductoInfo(fase);
-// const productos = pI.map((productoJSON)=>( productoObject(productoJSON,'0','0','0') )); 
+ const pI = ProductoInfo(fase);
+ const productos = pI.map((productoJSON)=>( productoObject(productoJSON,'0','0','0') )); 
 
-const productos = helperPO(datos);
+const productosP = helperPO(datos);
 
 const useStyles = makeStyles({
     table: {
@@ -40,7 +40,9 @@ const ProductionCalculator = () => {
     const classes = useStyles();
 
    // const [categories, setCategories] = useState([0])    
-    
+   
+   //productosP.then( (productos) => {   
+    //console.log(productos);
     return (
         <>
         <h1>Production calculator</h1>
@@ -59,6 +61,8 @@ const ProductionCalculator = () => {
         </TableHead>
         <TableBody>
             {
+              //productos.then( (productos) => 
+              //  {
                 productos.map((producto) => (
                     <TableRow key={producto.id}>
                         <TableCell component="th" scope="row">  {producto.nombre}      </TableCell>
@@ -70,6 +74,8 @@ const ProductionCalculator = () => {
                         <TableCell align="right">    {}   </TableCell>
                     </TableRow>
                 ))
+              // }
+              //)
             }
         </TableBody>
       </Table>
@@ -77,8 +83,12 @@ const ProductionCalculator = () => {
 
         </>
       );
+
+    //})  
     
 }
 
+productosP.then(ProductionCalculator);
 
-export default ProductionCalculator
+export default ProductionCalculator;
+*/

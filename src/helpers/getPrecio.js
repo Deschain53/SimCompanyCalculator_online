@@ -2,6 +2,7 @@
 //Obtiene TODOS los productos del mercado
 
 export const getPrecios = async(id) =>{
+    try{
     const header= `https://ronchon-vin-08117.herokuapp.com/`;
     //const header='';
     const url = header +`https://www.simcompanies.com/api/v2/market/${encodeURI(id)}`;
@@ -9,16 +10,22 @@ export const getPrecios = async(id) =>{
     const informacion = await resp.json();
 
     //Guardando en un objeto la informacion de interes
-    const precios = informacion.map( info =>{
+    const precios = informacion.map( ({quality,price,quantity}) =>{
         return{
-            calidad: info.quality,
-            precio: info.price,
-            cantidad: info.quantity
-
+            calidad: quality,
+            precio: price,
+            cantidad: quantity
         }
-    })
+    }) 
+
+
 
     return precios;
+
+}catch(error){
+    console.log(error);
+}
+
     }
 
 

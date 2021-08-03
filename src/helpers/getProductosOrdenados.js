@@ -5,7 +5,7 @@
 export const getProductosOrdenados = (preciosProductoPromise) => {
 
     const calidadMaxima = 6;
-    let precios = new Array();
+    let precios = [];
     preciosProductoPromise.then( preciosProducto => {
 
     //Para encontrar los precios de cada calidad

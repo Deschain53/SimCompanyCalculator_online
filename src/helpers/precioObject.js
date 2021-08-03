@@ -3,11 +3,11 @@ import {getProductosOrdenados} from './getProductosOrdenados';
 //Funcion que tiene como unica tarea ser el link y servir de abstraccion para que se pueda solicitar
 //un precio de manera mas facil
 
-export const precioObject = (producto) => {
+export const precioObject = async(producto) => {
 
-    const preciosProducto = getPrecios(producto);
+    const preciosProducto = await getPrecios(producto);
 
-    const preciosOrdenados =  getProductosOrdenados(preciosProducto);
+    const preciosOrdenados = getProductosOrdenados(preciosProducto);
 
     const objectPreciosOrdenados = {
         id: producto,

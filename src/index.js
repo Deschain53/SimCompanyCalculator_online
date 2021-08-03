@@ -2,10 +2,10 @@ import React from 'react' ;
 import ReactDOM from 'react-dom';
 //import PropTypes from 'prop-types'
 import './index.css';
-import ProductionCalculator  from './ProductionCalculator'
+import {ProductionC} from './ProductionC';
  
 ReactDOM.render(
-    <ProductionCalculator key = '1998'/>,
+    <ProductionC />,
     document.getElementById('root')
 );
 
