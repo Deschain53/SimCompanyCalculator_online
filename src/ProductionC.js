@@ -1,8 +1,8 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import {FormInfo} from './components/FormInfo';
 //import {useForm} from './hooks/useForm';
 //Importaciones para las tablas:-------------------
-import { withStyles,makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -13,7 +13,13 @@ import {Estilos} from './Estilos';
 //Importaciones de componentes, hooks y funcionalidades  
 import {  Fila  } from './components/Fila';
 import { useProducts } from './hooks/useProducts';
+import {useInformation} from './hooks/useInformation'
 import { FormAdd } from './components/FormAdd';
+import { QualityDropDownButton } from './components/QualityDropDownButton';
+import { FaseDropDownButton } from './components/FaseDropDownButton';
+//import {productObject} from './functional/processData/productObject'
+import { usePrecios } from './hooks/usePrecios';
+import { useCalcula } from './hooks/useCalcula';
 
 /***Falta probar:
 *Modificar un solo valor de un elemento en especifico
@@ -21,7 +27,7 @@ import { FormAdd } from './components/FormAdd';
 *Hacer el calculo para un producto
 */
 
-const {StyledTableCell, StyledTableRow} = Estilos();
+const {StyledTableCell} = Estilos();
 
 const useStyles = makeStyles({
   table: {
@@ -29,54 +35,75 @@ const useStyles = makeStyles({
   },
 });
 
-
 export const ProductionC = () => {
   const classes = useStyles();
 
-  const [informacion, setInformacion] = useState({
-    fase: 1,
-    edificio: 1,
-    PVM: 3,
-    admin: 0,
-    bonificacion: 0,
-    transporte: 0,
-  });
-  //console.log(informacion);
+  const {informacion,updateFromFormInfo, updateQuality, updateFase} = useInformation();
+  const {calidad,fase} = informacion;
 
-  const actualizaInfo = (newInformation = {}) => {
-    setInformacion(newInformation);
-  }
-  
+  const {productos, resetProducts, addProduct, setProductos} = useProducts();
+
+  const {precios, extraePreciosPrueba } = usePrecios();
+
+  const { getProductsWithNewMarketPrice} = useCalcula(precios, productos);
+
+  /*useEffect(() => {
+    console.log(precios);
+  }, [precios]);*/
+
+  useEffect(() => {
+    console.log(productos);
+  }, [productos]);
+
+  const calcula = () => {
+    const newProducts = getProductsWithNewMarketPrice(productos);
+    console.log(newProducts);
+    setProductos(newProducts);
+  };
+
 
   const [encabezados, setEncabezados] = useState([
     'Producto ','Calidad','Costo','Precio en mercado',
-    'Unidades hora', 'Ganancia/hora mercado','Ganancia/hora contrato']);
+    'Unidades hora', 'Ganancia/hora mercado','Ganancia/hora contrato']); 
 
-  //Para 
-  const producto1 = [{
-      id: 83,
-      calidad: 5,
-      fase: 0
-  }];
-  
-  const {productos, resetProducts, addProduct} = useProducts();
-  console.log(productos)
-    
     return (
     <>
       <h1>Production calculator</h1>
 
+      <FaseDropDownButton key ="FaseDropDownButton"
+      updateFase = {updateFase}/>
+
       <FormInfo 
       key = "formInfo"
-      actualizaInfo = {actualizaInfo}
+      updateFromFormInfo = {updateFromFormInfo}
+      informacion = {informacion}
       />
+
+      <QualityDropDownButton key= "DropDownButtonQuality"
+      updateQuality = {updateQuality}/>
 
       <FormAdd 
         key = "formAdd"
         fase = {1}
-        calidad = {1}
+        calidad = {calidad}
         addProduct = {addProduct}              
       />
+
+      <hr/>
+      <div>
+        <button className = "btn btn-primary" onClick = {calcula}> 
+        Calcula
+        </button>
+
+        <button className = "btn btn-primary" onClick = {resetProducts}> 
+        Limpiar tabla
+        </button>
+        
+        <button className = "btn btn-primary" onClick = {extraePreciosPrueba}> 
+        Extrae precios
+        </button>
+
+      </div>
 
       <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="customized table">
@@ -94,7 +121,7 @@ export const ProductionC = () => {
           {
             productos.map((producto) => (
               <Fila 
-              key = {producto.id}
+              key = {producto.id.toString() + '-' + producto.calidad.toString()}
               {...producto} 
               />
             ))  
@@ -110,3 +137,27 @@ export const ProductionC = () => {
 
 
 export default ProductionC;
+
+/*
+  const modifica = () => {  // Esta funcion se debe adaptar para hacer los calculos
+    console.log("click disparado");
+    //const newProductObject  = productObject(93,),
+    changeProduct(93,5,{    
+      id : 93,
+      nombre : 'Modificado',
+      fase : 1,
+      calidad : 8,
+      produccionHora : 1998,
+      precioMercado : 1234,
+      costo : 1111,
+      gananciaHoraMercado : 2,
+      gananciaHoraContrato : 3
+    })
+  }
+*/
+
+/*
+      <ButtonAction key = "buttonAction"  
+      leyenda = {"Modifica"}
+      acccion = {modifica}/>
+*/

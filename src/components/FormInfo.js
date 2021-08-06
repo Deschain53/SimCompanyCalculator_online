@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useForm } from '../hooks/useForm';
+//import {DropDownButton} from '../components/DropDownButton';
  
-export const FormInfo= ({actualizaInfo}) => {        //Se podria recibir una funcion setState
+export const FormInfo= ({updateFromFormInfo}) => {        //Se podria recibir una funcion setState
 
     const [formValues, handleInputChange] = useForm({
         edificio: '',
@@ -10,14 +11,18 @@ export const FormInfo= ({actualizaInfo}) => {        //Se podria recibir una fun
         bonificacion: '',
         transporte: '',
     });
- 
+    
+    //const {calidad,fase} = informacion;
     const {edificio,PVM,admin,bonificacion,transporte} = formValues;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        actualizaInfo(formValues);
-    }
+        //updateFromFormInfo(formValues);
+    };
 
+    useEffect(() => {
+        updateFromFormInfo(formValues);
+    }, [formValues])
 
     return (
         <form onSubmit = {handleSubmit}>
@@ -85,7 +90,7 @@ export const FormInfo= ({actualizaInfo}) => {        //Se podria recibir una fun
             </div>
 
             <button type = "submit" className = "btn btn-primary" > 
-                Guardar
+                Aplicar
             </button>
 
         </form>

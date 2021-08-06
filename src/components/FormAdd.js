@@ -14,8 +14,7 @@ export const FormAdd = ({fase = 1 , calidad = 1, addProduct} ) => {        //Se 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const {db_letter,name,producedAnHour} = getProductJSONoffline(producto,fase);
-        console.log(producedAnHour);      
+        const {db_letter,name,producedAnHour} = getProductJSONoffline(producto,fase);     
         const pO = productObject(db_letter,name,fase,calidad,producedAnHour);
         addProduct(pO);
     }

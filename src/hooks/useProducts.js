@@ -1,8 +1,10 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
-import{ productObject } from '../functional/processData/productObject';
+//import PropTypes from 'prop-types';
+//import{ productObject } from '../functional/processData/productObject';
 
 export const useProducts = () => {
+
+    const [isInitialState, setIsInitialState] = useState(true);
 
     const inicialState = {
         nombre: '...',
@@ -20,24 +22,24 @@ export const useProducts = () => {
 
     const resetProducts = () => {
         setProductos([inicialState]);
+        setIsInitialState(true);
     }
 
     const addProduct = (productoObject) => {
-
-        if(productos[0] === inicialState && productos.length === 1){
+        if(isInitialState){// && productos.length === 1
             setProductos([productoObject]);
+            setIsInitialState(false);
         }else{
-            setProductos( oldArray => [...oldArray, productoObject]);
+            setProductos( oldArray => [ productoObject, ...oldArray]);
         }
-    }
+    };
 
-    const changeProduct = (id,calidad,fase,newProductObject) => {
+    const changeProduct = (idP,calidadP,newProductObject) => {
         const indexProducto = productos.indexOf( 
-            productos.find( producto => 
-                producto.id === id || 
-                producto.calidad === calidad  ||
-                producto.fase === fase
-            ) 
+            productos.find( ({id,calidad}) => 
+                id === idP && 
+                calidad === calidadP 
+            )         
         );
 
         if(indexProducto !== -1){
@@ -45,13 +47,24 @@ export const useProducts = () => {
             auxProductos[indexProducto] = newProductObject;
             setProductos(auxProductos);
         }
+    };
 
-    }
+    /*const changeMarketPrice =  (idP,calidadP, newPrice) => {
+        const productObjet =  productos.find( ({id,calidad}) => id === idP && calidad === calidadP);  
+        console.log(productObjet);
+        if(productObjet !== undefined){
+            const productModified = {...productObjet,precioMercado : newPrice };
+            console.log(productModified);
+            changeProduct(idP,calidadP,productModified);
+            //changeProduct(id,calidad,productModified);
+        } 
+    };*/
     
     //En el return retornar la función
     return{
         productos,
         resetProducts,
-        addProduct
+        addProduct,
+        setProductos
     };
 }
