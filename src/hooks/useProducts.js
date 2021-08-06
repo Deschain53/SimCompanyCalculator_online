@@ -48,17 +48,6 @@ export const useProducts = () => {
             setProductos(auxProductos);
         }
     };
-
-    /*const changeMarketPrice =  (idP,calidadP, newPrice) => {
-        const productObjet =  productos.find( ({id,calidad}) => id === idP && calidad === calidadP);  
-        console.log(productObjet);
-        if(productObjet !== undefined){
-            const productModified = {...productObjet,precioMercado : newPrice };
-            console.log(productModified);
-            changeProduct(idP,calidadP,productModified);
-            //changeProduct(id,calidad,productModified);
-        } 
-    };*/
     
     //En el return retornar la función
     return{

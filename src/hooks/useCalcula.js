@@ -1,6 +1,6 @@
 //import React from 'react'
 
-export const useCalcula = (precios, productos) => {
+export const useCalcula = (precios, productos,setProductos) => {
 
     const findPricesProduct = (idProduct) => {
         const found = precios.find( ({id}) => id === idProduct);
@@ -11,8 +11,7 @@ export const useCalcula = (precios, productos) => {
         const precios = findPricesProduct(idProduct);
         if(precios !== undefined){
             const {precio} = precios;
-            //console.log(precio[quality]);
-            return precio[quality];
+            return precio[quality] !== undefined ?  precio[quality] : -1 ;  
         }else{
             return 0;
         }
@@ -21,18 +20,19 @@ export const useCalcula = (precios, productos) => {
     const getProductsWithNewMarketPrice = (productos) => {
         const newProductos = productos.map( (producto) => {
           const newPrice =  findPriceProductByIdQuality(producto.id,producto.calidad);
-          //console.log(newPrecio);
-          //changeMarketPrice(id,calidad,newPrecio);
-          const productModified = {...producto,precioMercado : newPrice };
-          console.log(productModified);
+          const productModified = {...producto, precioMercado : newPrice };
           return productModified;
         });
-        
+
         return newProductos;
       };
 
+    const calcula = async() => {
+        const newProducts = await getProductsWithNewMarketPrice(productos);
+        setProductos(newProducts);
+    };
 
 
-    return {
-        getProductsWithNewMarketPrice}
+
+    return {calcula};
 }

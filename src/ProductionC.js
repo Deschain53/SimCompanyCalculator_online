@@ -45,7 +45,7 @@ export const ProductionC = () => {
 
   const {precios, extraePreciosPrueba } = usePrecios();
 
-  const { getProductsWithNewMarketPrice} = useCalcula(precios, productos);
+  const { calcula} = useCalcula(precios, productos,setProductos);
 
   /*useEffect(() => {
     console.log(precios);
@@ -55,11 +55,9 @@ export const ProductionC = () => {
     console.log(productos);
   }, [productos]);
 
-  const calcula = () => {
-    const newProducts = getProductsWithNewMarketPrice(productos);
-    console.log(newProducts);
-    setProductos(newProducts);
-  };
+  /*const calcula = () => {
+    changeAndShowMarketPrices();
+  };*/
 
 
   const [encabezados, setEncabezados] = useState([
@@ -91,16 +89,16 @@ export const ProductionC = () => {
 
       <hr/>
       <div>
+        <button className = "btn btn-primary" onClick = {extraePreciosPrueba}> 
+        Extrae precios
+        </button>
+
         <button className = "btn btn-primary" onClick = {calcula}> 
         Calcula
         </button>
 
         <button className = "btn btn-primary" onClick = {resetProducts}> 
         Limpiar tabla
-        </button>
-        
-        <button className = "btn btn-primary" onClick = {extraePreciosPrueba}> 
-        Extrae precios
         </button>
 
       </div>
