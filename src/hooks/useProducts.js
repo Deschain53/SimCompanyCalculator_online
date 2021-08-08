@@ -54,6 +54,8 @@ export const useProducts = () => {
         productos,
         resetProducts,
         addProduct,
-        setProductos
+        setProductos,
+        isInitialState,
+        setIsInitialState
     };
 }

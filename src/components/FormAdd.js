@@ -49,5 +49,3 @@ FormAdd.propTypes = {
     fase : PropTypes.number.isRequired,
     calidad : PropTypes.number.isRequired
 }
-
-///Agregar proptypes para las entradas

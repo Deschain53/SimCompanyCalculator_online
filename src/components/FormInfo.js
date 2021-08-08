@@ -26,8 +26,6 @@ export const FormInfo= ({updateFromFormInfo}) => {        //Se podria recibir un
 
     return (
         <form onSubmit = {handleSubmit}>
-            <h2> Datos </h2>
-            <hr />
 
             <div className = "form-group">
                 <input
@@ -89,10 +87,12 @@ export const FormInfo= ({updateFromFormInfo}) => {        //Se podria recibir un
                 />
             </div>
 
-            <button type = "submit" className = "btn btn-primary" > 
-                Aplicar
-            </button>
-
         </form>
     )
 }
+
+/*
+            <button type = "submit" className = "btn btn-primary" > 
+                Aplicar
+            </button>
+*/

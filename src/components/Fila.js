@@ -20,11 +20,11 @@ export const Fila = ({nombre,calidad,id,costo,precioMercado,produccionHora = 0,
         <StyledTableRow  key={key}>
             <StyledTableCell component="th" scope="row">  {nombre}        </StyledTableCell>
             <StyledTableCell align="right">    {calidad}                  </StyledTableCell> 
-            <StyledTableCell align="right">    {costo}                    </StyledTableCell>
+            <StyledTableCell align="right">    {procesaDecimales(costo)}                    </StyledTableCell>
             <StyledTableCell align="right">    {precioMercado}            </StyledTableCell>
             <StyledTableCell align="right">    {procesaDecimales(produccionHora)}          </StyledTableCell>
-            <StyledTableCell align="right">    {gananciaHoraMercado}      </StyledTableCell>
-            <StyledTableCell align="right">    {gananciaHoraContrato}      </StyledTableCell>
+            <StyledTableCell align="right">    {procesaDecimales(gananciaHoraMercado)}      </StyledTableCell>
+            <StyledTableCell align="right">    {procesaDecimales(gananciaHoraContrato)}      </StyledTableCell>
         </StyledTableRow >
     )
 }

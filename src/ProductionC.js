@@ -14,12 +14,14 @@ import {Estilos} from './Estilos';
 import {  Fila  } from './components/Fila';
 import { useProducts } from './hooks/useProducts';
 import {useInformation} from './hooks/useInformation'
-import { FormAdd } from './components/FormAdd';
+//import { FormAdd } from './components/FormAdd';
 import { QualityDropDownButton } from './components/QualityDropDownButton';
 import { FaseDropDownButton } from './components/FaseDropDownButton';
 //import {productObject} from './functional/processData/productObject'
 import { usePrecios } from './hooks/usePrecios';
 import { useCalcula } from './hooks/useCalcula';
+import { useBuilding } from './hooks/useBuilding';
+import { BuildingDropButton } from './components/BuildingDropButton';
 
 /***Falta probar:
 *Modificar un solo valor de un elemento en especifico
@@ -41,24 +43,25 @@ export const ProductionC = () => {
   const {informacion,updateFromFormInfo, updateQuality, updateFase} = useInformation();
   const {calidad,fase} = informacion;
 
-  const {productos, resetProducts, addProduct, setProductos} = useProducts();
+  const {productos, resetProducts, addProduct, setProductos,isInitialState, setIsInitialState} = useProducts();
 
   const {precios, extraePreciosPrueba } = usePrecios();
 
-  const { calcula} = useCalcula(precios, productos,setProductos);
+  const {edificioID, setEdificio,produce} = useBuilding(informacion, setProductos,setIsInitialState);
 
-  /*useEffect(() => {
-    console.log(precios);
-  }, [precios]);*/
+  const { calcula} = useCalcula(precios, productos,setProductos,informacion);
 
   useEffect(() => {
-    console.log(productos);
-  }, [productos]);
+    if(!isInitialState){
+    calcula();      
+    //console.log(informacion);
+    }
+  }, [informacion]);
 
-  /*const calcula = () => {
-    changeAndShowMarketPrices();
-  };*/
-
+  /*useEffect(() => {
+    calcula();
+    //console.log(productos);
+  }, [productos]);*/
 
   const [encabezados, setEncabezados] = useState([
     'Producto ','Calidad','Costo','Precio en mercado',
@@ -67,6 +70,7 @@ export const ProductionC = () => {
     return (
     <>
       <h1>Production calculator</h1>
+      <hr/>
 
       <FaseDropDownButton key ="FaseDropDownButton"
       updateFase = {updateFase}/>
@@ -80,11 +84,8 @@ export const ProductionC = () => {
       <QualityDropDownButton key= "DropDownButtonQuality"
       updateQuality = {updateQuality}/>
 
-      <FormAdd 
-        key = "formAdd"
-        fase = {1}
-        calidad = {calidad}
-        addProduct = {addProduct}              
+      <BuildingDropButton key = "BuildingDropButton"
+      setEdificio = {setEdificio}
       />
 
       <hr/>
@@ -93,7 +94,7 @@ export const ProductionC = () => {
         Extrae precios
         </button>
 
-        <button className = "btn btn-primary" onClick = {calcula}> 
+        <button className = "btn btn-primary" onClick = { () => {if(!isInitialState){ calcula() }}  }> 
         Calcula
         </button>
 
@@ -108,10 +109,9 @@ export const ProductionC = () => {
         <TableHead>
           <TableRow >
             {
-                encabezados.map((encabezado)=>(
-                    <StyledTableCell key = {encabezado}> {encabezado} </StyledTableCell>
-                ))
-
+               encabezados.map((encabezado)=>(
+                   <StyledTableCell key = {encabezado}> {encabezado} </StyledTableCell>
+               ))
             } 
           </TableRow >
         </TableHead>
@@ -137,25 +137,14 @@ export const ProductionC = () => {
 export default ProductionC;
 
 /*
-  const modifica = () => {  // Esta funcion se debe adaptar para hacer los calculos
-    console.log("click disparado");
-    //const newProductObject  = productObject(93,),
-    changeProduct(93,5,{    
-      id : 93,
-      nombre : 'Modificado',
-      fase : 1,
-      calidad : 8,
-      produccionHora : 1998,
-      precioMercado : 1234,
-      costo : 1111,
-      gananciaHoraMercado : 2,
-      gananciaHoraContrato : 3
-    })
-  }
+      <FormAdd 
+        key = "formAdd"
+        fase = {1}
+        calidad = {calidad}
+        addProduct = {addProduct}              
+      />
 */
 
 /*
-      <ButtonAction key = "buttonAction"  
-      leyenda = {"Modifica"}
-      acccion = {modifica}/>
+
 */
