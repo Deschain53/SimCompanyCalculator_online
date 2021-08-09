@@ -23,10 +23,13 @@ import { useCalcula } from './hooks/useCalcula';
 import { useBuilding } from './hooks/useBuilding';
 import { BuildingDropButton } from './components/BuildingDropButton';
 
-/***Falta probar:
-*Modificar un solo valor de un elemento en especifico
-*Manejar un useState con el array de los precios
-*Hacer el calculo para un producto
+/***Falta agregar:
+*Verificar que cambie los datos en cuanto cambia los edificios
+*Arreglar el que calcule cuando se cambia el edificio
+*Arreglar el que calcule en cuanto se cambia de fase
+*Agregar mediante funcion y haciendo uso de modulo react el listado completo de edificios
+**Verificar que funcione con todos los precios
+*Subir a produccion para que funcione con todos los precios
 */
 
 const {StyledTableCell} = Estilos();
@@ -40,16 +43,15 @@ const useStyles = makeStyles({
 export const ProductionC = () => {
   const classes = useStyles();
 
-  const {informacion,updateFromFormInfo, updateQuality, updateFase} = useInformation();
-  const {calidad,fase} = informacion;
+  const {informacion, updateFromFormInfo, updateQuality, updateFase} = useInformation();
 
-  const {productos, resetProducts, addProduct, setProductos,isInitialState, setIsInitialState} = useProducts();
+  const {productos, resetProducts, setProductos, isInitialState, setIsInitialState} = useProducts();
 
-  const {precios, extraePreciosPrueba } = usePrecios();
+  const {precios, extraePreciosPrueba,extraePreciosOnline} = usePrecios();
 
-  const {edificioID, setEdificio,produce} = useBuilding(informacion, setProductos,setIsInitialState);
+  const {setEdificio,edificioID} = useBuilding(informacion, setProductos, setIsInitialState);
 
-  const { calcula} = useCalcula(precios, productos,setProductos,informacion);
+  const {calcula} = useCalcula(precios, productos, setProductos, informacion);
 
   useEffect(() => {
     if(!isInitialState){
@@ -58,10 +60,10 @@ export const ProductionC = () => {
     }
   }, [informacion]);
 
-  /*useEffect(() => {
-    calcula();
-    //console.log(productos);
-  }, [productos]);*/
+  useEffect(() => {
+    //calcula();
+    console.log(precios);
+  }, [precios]);
 
   const [encabezados, setEncabezados] = useState([
     'Producto ','Calidad','Costo','Precio en mercado',
@@ -90,7 +92,7 @@ export const ProductionC = () => {
 
       <hr/>
       <div>
-        <button className = "btn btn-primary" onClick = {extraePreciosPrueba}> 
+        <button className = "btn btn-primary" onClick = {extraePreciosOnline}> 
         Extrae precios
         </button>
 

@@ -22,11 +22,11 @@ export const getPrecios = async(id) =>{
 
     return precios;
 
-}catch(error){
-    console.log(error);
-}
-
+    }catch(error){
+        console.log(error);
     }
+
+}
 
 
 
