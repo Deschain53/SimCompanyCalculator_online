@@ -53,17 +53,28 @@ export const ProductionC = () => {
 
   const {calcula} = useCalcula(precios, productos, setProductos, informacion);
 
+  console.log('renderizando');
+
   useEffect(() => {
     if(!isInitialState){
+    console.log('Informacion');
     calcula();      
     //console.log(informacion);
     }
   }, [informacion]);
 
+  /*useEffect(() => {    
+    if(!isInitialState){
+      console.log('productos');
+      calcula();      
+    }  
+  }, [productos])
+  */
+ 
   useEffect(() => {
     //calcula();
     console.log(precios);
-  }, [precios]);
+  }, [precios])
 
   const [encabezados, setEncabezados] = useState([
     'Producto ','Calidad','Costo','Precio en mercado',

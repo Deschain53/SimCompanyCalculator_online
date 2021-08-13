@@ -33,8 +33,20 @@ export const useProducts = () => {
             setProductos( oldArray => [ productoObject, ...oldArray]);
         }
     };
+    
+    //En el return retornar la función
+    return{
+        productos,
+        resetProducts,
+        addProduct,
+        setProductos,
+        isInitialState,
+        setIsInitialState
+    };
+}
 
-    const changeProduct = (idP,calidadP,newProductObject) => {
+
+    /*const changeProduct = (idP,calidadP,newProductObject) => {
         const indexProducto = productos.indexOf( 
             productos.find( ({id,calidad}) => 
                 id === idP && 
@@ -47,15 +59,4 @@ export const useProducts = () => {
             auxProductos[indexProducto] = newProductObject;
             setProductos(auxProductos);
         }
-    };
-    
-    //En el return retornar la función
-    return{
-        productos,
-        resetProducts,
-        addProduct,
-        setProductos,
-        isInitialState,
-        setIsInitialState
-    };
-}
+    };*/

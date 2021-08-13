@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {getEdificiosInfo} from '../functional/getData/getEdificiosInfo';
 //Este hook manejara el estado con la informacion de los edificios ademas tener metodos para
 //extraer caracteristicas dentro de los mismos
@@ -6,7 +6,7 @@ import {getEdificiosInfo} from '../functional/getData/getEdificiosInfo';
 //extraer los datos desde una API
 
 export const useEdificios = () => {
-    const [edificiosInfoObject, setEdificiosInfoObject] = useState(getEdificiosInfo);  //Este estado solo sera verdad si se quiere trabajar offline con los datos de los edificios
+    const [edificiosInfoObject] = useState(getEdificiosInfo);  //Este estado solo sera verdad si se quiere trabajar offline con los datos de los edificios
 
     const getSalario = (id_producto) => {       
         const edificio = edificiosInfoObject.find( ({produce}) => produce.includes(id_producto));

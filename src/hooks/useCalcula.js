@@ -69,7 +69,7 @@ export const useCalcula = (precios, productos,setProductos,informacion) => {
         const {admin} = informacion;
         //Obtener gastos administrativos de los datos proporcionador por el formulario POR RESOLVER
         const costoAdministrativo = salario * (admin/100);
-        return 0;
+        return costoAdministrativo;
     };
 
     const getCostoManoObraPorUnidad = (id,fase) => {
@@ -89,7 +89,7 @@ export const useCalcula = (precios, productos,setProductos,informacion) => {
     
     const getProductsWithPricesCalculated = (productos) => {
         const newProductos = productos.map( producto => {
-            const {id,fase,calidad,gastosAdministrativos} = producto;
+            const {id,fase,calidad} = producto;
 
             const precioCostoMateriasPrimas = getPrecioCostoMateriaPrima(id,fase, (calidad > 1) ? calidad-1 : 0 );
             const costoManoObraPorUnidad = getCostoManoObraPorUnidad(id,fase);
