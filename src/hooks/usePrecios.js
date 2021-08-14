@@ -9,8 +9,8 @@ export const usePrecios = () => {
 
     const getPrecios = async(id) =>{
         try{
-        ///const header= `https://ronchon-vin-08117.herokuapp.com/`;
-        const header='';
+        const header= `https://ronchon-vin-08117.herokuapp.com/`;
+        //const header='';
         const url = header +`https://www.simcompanies.com/api/v2/market/${encodeURI(id)}`;
         const resp = await fetch(url);
         const informacion = await resp.json();
