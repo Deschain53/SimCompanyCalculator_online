@@ -153,18 +153,18 @@ export const useCalcula = (precios, productos,setProductos,informacion) => {
         return newProductos;
     };
 
-    const changeQualityOfAllProductsToCurrentQuality= (productos) => {
+    const applyCurrentQualityandFaseToAll= (productos) => {
         const newProductos = productos.map( producto => { 
-            const {calidad} = informacion;
-            const productModified = {...producto, calidad};
+            const {calidad,fase} = informacion;
+            const productModified = {...producto, calidad,fase};
             return productModified;
         });
         return newProductos;
     };
 
     const calcula = async() => {
-        const productosToCurrentQuality = await changeQualityOfAllProductsToCurrentQuality(productos)
-        const productsWithNewMarketPrice = await getProductsWithNewMarketPrice(productosToCurrentQuality);
+        const productosToCurrentQualityAndFase = await applyCurrentQualityandFaseToAll(productos)
+        const productsWithNewMarketPrice = await getProductsWithNewMarketPrice(productosToCurrentQualityAndFase);
         const productsWithPricesCalculated = await getProductsWithPricesCalculated(productsWithNewMarketPrice);
         const productsWithRealProduction = await getProductsWithRealProduction(productsWithPricesCalculated);
         const productsWithProfitPerHourByMarket = await getProductsWithRealProfitPerHourByMarket(productsWithRealProduction);

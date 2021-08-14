@@ -9,8 +9,8 @@ export const usePrecios = () => {
 
     const getPrecios = async(id) =>{
         try{
-        const header= `https://ronchon-vin-08117.herokuapp.com/`;
-        //const header='';
+        ///const header= `https://ronchon-vin-08117.herokuapp.com/`;
+        const header='';
         const url = header +`https://www.simcompanies.com/api/v2/market/${encodeURI(id)}`;
         const resp = await fetch(url);
         const informacion = await resp.json();
@@ -83,9 +83,9 @@ export const usePrecios = () => {
 
     const extraePreciosOnline =  () => {
 
-        const miniPrueba = [ {db_letter: 80}, {db_letter:81 }, {db_letter:82 }, {db_letter: 98 }];
+        //const miniPrueba = [ {db_letter: 80}, {db_letter:81 }, {db_letter:82 }, {db_letter: 98 }];
                                     //productosJSON   //miniPrueba
-        const newPreciosPromises = miniPrueba.map( ({db_letter}) =>  precioObject(db_letter));
+        const newPreciosPromises = productosJSON.map( ({db_letter}) =>  precioObject(db_letter));
         console.log(newPreciosPromises);        
         Promise.all(newPreciosPromises).then(
             newPreciosR => {

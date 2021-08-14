@@ -23,13 +23,11 @@ import { useCalcula } from './hooks/useCalcula';
 import { useBuilding } from './hooks/useBuilding';
 import { BuildingDropButton } from './components/BuildingDropButton';
 
-/***Falta agregar:
-*Verificar que cambie los datos en cuanto cambia los edificios
-*Arreglar el que calcule cuando se cambia el edificio
-*Arreglar el que calcule en cuanto se cambia de fase
-*Agregar mediante funcion y haciendo uso de modulo react el listado completo de edificios
-**Verificar que funcione con todos los precios
-*Subir a produccion para que funcione con todos los precios
+/***Falta:
+*Subir a produccion
+*Corregir bug que evita que se calcule automaticamente al cambiar de edificio
+*Agregar algun tipo de animacion que indique que se están haciendo las solicitudes al API 
+  y cuando termine el proceso (Algo asi como estar en verde o en rojo)
 */
 
 const {StyledTableCell} = Estilos();
@@ -53,27 +51,19 @@ export const ProductionC = () => {
 
   const {calcula} = useCalcula(precios, productos, setProductos, informacion);
 
-  console.log('renderizando');
+  //console.log('renderizando');
 
   useEffect(() => {
     if(!isInitialState){
-    console.log('Informacion');
+    //console.log('Informacion');
     calcula();      
     //console.log(informacion);
     }
   }, [informacion]);
 
-  /*useEffect(() => {    
-    if(!isInitialState){
-      console.log('productos');
-      calcula();      
-    }  
-  }, [productos])
-  */
- 
   useEffect(() => {
     //calcula();
-    console.log(precios);
+    //console.log(precios);
   }, [precios])
 
   const [encabezados, setEncabezados] = useState([
@@ -148,16 +138,3 @@ export const ProductionC = () => {
 
 
 export default ProductionC;
-
-/*
-      <FormAdd 
-        key = "formAdd"
-        fase = {1}
-        calidad = {calidad}
-        addProduct = {addProduct}              
-      />
-*/
-
-/*
-
-*/
